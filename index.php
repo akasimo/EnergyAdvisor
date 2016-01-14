@@ -4,15 +4,52 @@
 
 	</head>
 
+		<title>Energy Advisor</title>
+    	<link href="css/bootstrap.css" rel="stylesheet">
+
 	<body>
-	
-		<h1>Data recovery system</h1>
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.php">Energy Advisor</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Prediction</a></li>
+            <li><a href="setting.php">Settings</a></li>
+            <li><a href="mailto:guillaume.emery@edu.ece.fr">Contact</a></li>
+          </ul>
+          
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    <div class = "page-header">
+   
+   			<h1>Energy Advisor</h1>
+   
+	</div>
+	</div>
+
+    <div class="container">
+
+    	<div class="jumbotron">
+
+    		<p>Prediction solution for gas consuption using Machine Learning technology</p>
+
+    	</div>
+
+    </div>
+
 		
-		<form action="downloader.php" method="post">
-			<p>Enter begin date : <input id="begin" name="begin" value="yyyy-mm-dd"></p>
-			<p>Enter end date : <input id="end" name="end" value="yyyy-mm-dd"></p>
-    		<p><input type="submit" value="OK"></p>
-    	</form>
 
 	</body>
 
