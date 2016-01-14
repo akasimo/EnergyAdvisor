@@ -5,7 +5,7 @@
 	</head>
 
 		<title>Energy Advisor</title>
-    	<link href="css/bootstrap.css" rel="stylesheet">
+    	<link href="css/bootstrap.min.css" rel="stylesheet">
 
 	<body>
 
@@ -23,19 +23,19 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="#">Prediction</a></li>
-            <li><a href="setting.php">Settings</a></li>
+            <li><a href="settings.php">Settings</a></li>
             <li><a href="mailto:guillaume.emery@edu.ece.fr">Contact</a></li>
           </ul>
-          
+
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
     <div class="container">
     <div class = "page-header">
-   
+
    			<h1>Energy Advisor</h1>
-   
+
 	</div>
 	</div>
 
@@ -49,7 +49,7 @@
 
     </div>
 
-		
+
 
 	</body>
 
