@@ -104,10 +104,15 @@ function downloader() {
 
 	$url = $_SESSION['return'];
 
-	if ($url != null) {
+	$file = fopen($url, "rb");
+	if ($file) {
+		$newf = fopen($destination, "wb");
+	}
 
-		file_put_contents($destination, file_get_contents($url));
-
+	if ($newf) {
+		while (!feof($file)) {
+			fwrite($newf, fread($file, 1024 * 8), 1024 * 8);
+		}
 	}
 
 	/*$filename = $path . "downloaded.xml";
