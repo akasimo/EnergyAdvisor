@@ -23,7 +23,7 @@ session_start();?>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="index.php">Prediction</a></li>
+            <li><a href="predictions.php">Prediction</a></li>
             <li class="active"><a href="settings.php">Settings</a></li>
             <li><a href="mailto:ppe1535@gmail.com">Contact</a></li>
           </ul>

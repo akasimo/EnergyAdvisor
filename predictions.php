@@ -22,7 +22,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="predictions.php">Prediction</a></li>
+            <li><a href="prediction.php">Prediction</a></li>
             <li><a href="settings.php">Settings</a></li>
             <li><a href="mailto:guillaume.emery@edu.ece.fr">Contact</a></li>
           </ul>
@@ -43,17 +43,36 @@
 
     	<div class="jumbotron">
 
-    		<p>Prediction solution for gas consuption using Machine Learning technology</p>
+    		<form action= "<?php
+matlabExecutor()?>" method="post">
+          <p>Enter matlab formula : <input id="formula" name="formula"></p>
+          <p><input type="submit" value="Analyse"></p>
+
+        </form>
 
     	</div>
 
     </div>
 
-
+  <?php
+if (isset($_SESSION['return'])) {
+	echo $_SESSION['return'] . "<br>";
+}
+?>
 
 	</body>
 
+  <?php
 
+function matlabExecutor() {
+
+	$command = $_POST['formula'];
+
+	$_SESSION['return'] = shell_exec($command);
+	//exec('matlab');
+	//
+}
+?>
 
 
 </html>
