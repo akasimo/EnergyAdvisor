@@ -22,7 +22,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="prediction.php">Prediction</a></li>
+            <li><a href="predictions.php">Prediction</a></li>
             <li><a href="settings.php">Settings</a></li>
             <li><a href="mailto:guillaume.emery@edu.ece.fr">Contact</a></li>
           </ul>
@@ -43,20 +43,23 @@
 
     	<div class="jumbotron">
 
-    		<form action= "<?php
-matlabExecutor()?>" method="post">
-          <p>Enter matlab formula : <input id="formula" name="formula"></p>
-          <p><input type="submit" value="Analyse"></p>
-
-        </form>
+    		<form enctype="multipart/form-data" action="<?php uploader()?>" method="post">
+                            <!-- MAX_FILE_SIZE doit précéder le champ input de type file -->
+                            <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                            <!-- Le nom de l'élément input détermine le nom dans le tableau $_FILES -->
+                            Path of Matlab script: <input type="file" name="userfile" id="userfile" /><br>
+                            <input type="submit" value="Upload" name="submit" />
+                    </form>
 
     	</div>
 
     </div>
 
   <?php
-if (isset($_SESSION['return'])) {
-	echo $_SESSION['return'] . "<br>";
+if (isset($_SESSION['return']) && $_SESSION['return']['validate']) {
+	putenv('PATH=' . getenv('PATH') . ':/Applications/MATLAB_R2014b.app/bin/matlab:.');
+	//echo shell_exec('env');
+	exec("matlab -nodisplay -nosplash -nodesktop -r \"script;exit;\"");
 }
 ?>
 
@@ -64,14 +67,26 @@ if (isset($_SESSION['return'])) {
 
   <?php
 
-function matlabExecutor() {
+function uploader() {
+	$uploadfile = "script.m";
 
-	$command = $_POST['formula'];
+	if (isset($_POST['submit'])) {
 
-	$_SESSION['return'] = shell_exec($command);
-	//exec('matlab');
-	//
+		if (file_exists($uploadfile) || $_FILES["userfile"]["size"] > 500000) {
+			$_SESSION['return']['validate'] = false;
+		}
+
+		if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
+			$_SESSION['return']['validate'] = true;
+			$_SESSION['return']['path'] = $uploadfile;
+		} else {
+			$_SESSION['return']['validate'] = false;
+		}
+
+	}
+
 }
+
 ?>
 
 
