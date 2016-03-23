@@ -1,2 +1,11 @@
+![alt tag](res/img/logo.png?raw=true "Title")
+
 This repository hosts all the sources used in our project.
-Later it will host a functionnal version of our project (datas will or will not be provided depending on the right on them)
+
+On the server side where a correct JVM and a Matlab installation are 
+correctly set, the script bin/PERIODIC_EXECUTE.sh has to be executed 
+periodically (once per day)
+
+Datas are stored in the res/csv folder.
+
+

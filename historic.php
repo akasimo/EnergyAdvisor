@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 
 <html>
-
-	<head>
-
-  <script type="text/javascript" src="res/js/jquery.js"></script>
-  <script type="text/javascript" src="res/js/waitMe.js"></script>
-  <script src="res/js/Pred.js"></script>
-  <script src="res/js/bootstrap.min.js"></script>
-  <link href="res/css/bootstrap.css" rel="stylesheet">
-  <link type="text/css" href="res/css/waitMe.css" rel="stylesheet">
-  <title>Energy Advisor</title>
-  <meta charset="UTF-8">
+<head>
+<!-- ATTENTION BUG SUR LA TAILLE DU GRAPHIQUE QUAND ON REDUIT LA FENETRE-->
+      <link href="res/css/bootstrap.css" rel="stylesheet">
+      <link type="text/css" href="res/css/waitMe.css" rel="stylesheet">
+      <script type="text/javascript" src="res/js/Chart.js"></script>
+      <script type="text/javascript" src="res/js/jquery.js"></script>
+      <script type="text/javascript" src="res/js/waitMe.js"></script>
+      <script src="res/js/Historic.js"></script>
+      <script src="res/js/bootstrap.min.js"></script>
+      <meta charset="UTF-8">
 
 </head>
-
-  <body>
-
+<body>
 	<nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -43,56 +40,45 @@
     </nav>
 
     <div class="container">
-    <div class = "page-header">
-      <div class="pull-right" id="printButton"><button class="btn btn-default">Imprimer</button></div>
-      <h1>Prédictions</h1>
-	</div>
+      <div class="page-header">
+        <h1>Historique de consommation</h1>
+      </div>
+    </div>
 
-  <div class="container" id="predictResults"></div>
-  <div class="jumbotron hidden-print" id="france">
-    <h4 id="titleMap">Cliquez sur la carte pour faire une nouvelle prédiction</h4><br/>
-    <map name="mapfr">
-      <area shape=RECT coords="0,0,400,186" onClick="$(this).popOver('north');">
-      <area shape=RECT coords="186,0,400,372" onClick="$(this).popOver('south');">
-    </map>
-
-    <img src="res/img/map.png" width="400" height="372" alt="" usemap="#mapfr">
-
-  </div>
-  </div>
-  <div id="predmodal" class="modal fade">
-
-  <!-- Modal content -->
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h1 class="modal-title" id="zone-modal-title"></h1>
+    <div class="container" id="chartContainer">
+      <div class="row">
+        <div class="col-md-9">
+            <div>
+              <canvas id="myChart"></canvas>
+            </div>
         </div>
-        <div class="modal-body">
-          <h4>Sélectionnez la période de prédiction :</h4>
-
-          <form name="prediction" id="prediction">
-            <fieldset class="form-group">
-            <label for="exampleSelect1">Jours</label>
+        <div class="col-md-3">
+        <h4>Choisissez la zone de prédiction</h4>
+        <form name="prediction" id="prediction">
+          <fieldset class="form-group">
+            <!--<label for="exampleSelect1">Durée (semaines)</label>
             <select class="form-control" id="duration" name="duration">
               <option>1</option>
               <option>2</option>
               <option>3</option>
               <option>4</option>
+            </select>-->
+            <label for="exampleSelect1">Zone</label>
+            <select class="form-control" id="zone" name="zone">
+              <option>Nord</option>
+              <option>Sud</option>
             </select>
-            <select class="form-control" id="zone" name="zone"></select>
             </fieldset>
-          </form>
-          <button class="btn btn-primary" id="submitbutton">Prédire</button>
-        </div>
+        </form>
 
+          <button class="btn btn-primary" id="submitbutton">Valider</button>
+
+        </div>
       </div>
     </div>
 
-  </div>
 
-  <div id="contactmodal" class="modal fade">
+    <div id="contactmodal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -114,8 +100,6 @@
                 </div>
             </div>
         </div>
-	</body>
-
 
 <div class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">
@@ -127,5 +111,5 @@
             </a>
         </div>
     </div>
-
+</body>
 </html>
