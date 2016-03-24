@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by guillaume on 19/02/2016.
@@ -71,6 +70,7 @@ public class Downloader {
     public void parsingCall(String inputFileName, String outputFileName){
 
         Parser p = new Parser(inputFileName, "../res/csv/" + outputFileName + ".csv");
+        //Parser p = new Parser(inputFileName, outputFileName + ".csv");
         p.appendtoMatrix(outputFileName);
         p.clear();
         System.out.println("Appended to "+ outputFileName + " matrix!");
@@ -111,32 +111,29 @@ public class Downloader {
             today = null;
         }
 
-        while(begin.before(today)){
+        while(begin.before(date2)){
             end = addDays(begin,1);
             System.out.println("About to download from " + begin.toString() + " to " + end.toString());
             new Downloader(format.format(begin), format.format(end));
             begin = addDays(end,1);
         }
 
-        int result = 0;
+        System.out.println("Done with GRT datas, starting forecast...");
 
-        while (result != 62) {
+
+        int i = 0;
+
+        while (i != 62) {
 
             Forecasting forecasting = new Forecasting();
-            result = 0;
-            int size;
+            System.out.println("Begin fetching...");
             try {
-                forecasting.initWriter();
-                forecasting.readCSV();
-                List<double[]> lat_lon = forecasting.getLatLon();
-                size = lat_lon.size();
-                for (int i=0; i<size; i++) {
-                    forecasting.fillFile(lat_lon.get(i)[0], lat_lon.get(i)[1]);
-                    System.out.println(i+1 + "/" + size + " completed!");
-                    result = i+1;
+                for(double[] couple : forecasting.getLatLon()){
+                    forecasting.fillFile(couple[0], couple[1]);
+                    System.out.println(i+1 + "/62 completed!");
+                    i ++;
                     Thread.sleep(100);
                 }
-                forecasting.closeWriter();
                 forecasting.clean();
             }
             catch (JSONException e) {

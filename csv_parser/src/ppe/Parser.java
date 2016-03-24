@@ -69,39 +69,4 @@ public class Parser {
         }catch(Exception e){e.printStackTrace();}
 
     }
-
-    /*public void meteoFrance(){
-
-        SimpleDateFormat grtformat = new SimpleDateFormat("ddMMyyyy");
-        SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
-        for(String[] row : rows) {
-            // add the data of global zone -- have to be refined later
-
-                try{
-                    row[1] = sf.format(grtformat.parse(row[1]));
-
-                    out.write(row[0] + ";" + row[1] + ";" + row[2] + "\n");
-                }catch(IOException io){io.printStackTrace();} catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-
-            //else break;
-
-        }
-    }
-
-    public List<String[]> getRows() {
-        return rows;
-    }
-
-
-    public static void main(String[] args){
-
-        Parser p = new Parser("meteo.csv", "meteofinal.csv");
-        p.meteoFrance();
-        p.clear();
-        System.out.println("Done!");
-
-    }*/
 }
