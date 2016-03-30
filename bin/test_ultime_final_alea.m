@@ -4,7 +4,7 @@ clear ; close all; clc
 
 
 
-[MatriceSansNan] = loader('historiques_consommations_zones\sud.csv', 0 , 0);
+[MatriceSansNan] = loader('../res/csv/sud.csv', 0 , 0);
 
 ymaster =  MatriceSansNan(:,2);
 Xmaster = [];
@@ -89,7 +89,7 @@ end
    
 
 
-options = optimset('MaxIter', 50);
+options = optimset('MaxIter', 10);
 lambda = 0; 
 % Create "short hand" for the cost function to be minimized
 costFunction = @(p) nnCostFunction(p, ...
