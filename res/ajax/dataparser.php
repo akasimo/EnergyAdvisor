@@ -19,7 +19,7 @@ $array = array();
 //$duree = $_POST['duree'];
 $zone = $_POST['zone'];
 
-if (($file = fopen("../csv/pred.csv", "r")) !== false) {
+if (($file = fopen("../csv/histo.csv", "r")) !== false) {
 	while (($data = fgetcsv($file, ",")) !== false) {
 
 		if (strcmp($zone, 'north') == 0) {
