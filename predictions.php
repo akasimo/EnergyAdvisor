@@ -50,7 +50,8 @@
 
   <div class="container" id="predictResults"></div>
   <div class="jumbotron hidden-print" id="france">
-    <h4 id="titleMap">Cliquez sur la carte pour faire une nouvelle prédiction</h4><br/>
+    <h4 id="titleMap">Cliquez sur la carte pour faire une nouvelle prédiction</h4>
+    <br/>
     <map name="mapfr">
       <area shape=RECT coords="0,0,400,186" onClick="$(this).popOver('north');">
       <area shape=RECT coords="186,0,400,372" onClick="$(this).popOver('south');">

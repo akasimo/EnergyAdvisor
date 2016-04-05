@@ -6,6 +6,7 @@ $(function() {
     $('#result').css('display', 'none');
     $('#printButton').css('display','none');
     $('#titleMap').css('text-align','left');
+    $('#titleCaption').css('text-align','left');
     $.fn.popOver = function(zone) {
     	var place;
     	

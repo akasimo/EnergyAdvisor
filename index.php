@@ -94,6 +94,7 @@
             <p class="navbar-text pull-left">
                 2016 - PPE 1535 - ECE Paris
             </p>
+            
             <a href="https://github.com/EnergyAdvisorECE/EnergyAdvisor" class="navbar-btn btn-info btn pull-right">
                 GitHub Repo
             </a>

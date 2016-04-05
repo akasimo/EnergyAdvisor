@@ -48,7 +48,7 @@
     <div class="container" id="chartContainer">
       <div class="row">
         <div class="col-md-9">
-            <div>
+            <div id="myChartContainer">
               <canvas id="myChart"></canvas>
             </div>
         </div>

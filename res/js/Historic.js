@@ -84,11 +84,18 @@ $(function() {
                 var ret = jQuery.parseJSON(data);
                 var dates = Object.keys(ret);
                 $('#chartContainer').waitMe('hide');
-                for (i = 0; i < chartdata['labels'].length; i++) myLineChart.removeData();
+                var l = chartdata['labels'].length
+                if(l != 0 )for (i = 0; i <= 5 ; i++) myLineChart.removeData();
                 for (i = 0; i < dates.length; i++) {
                     //myLineChart.removeData();
                     myLineChart.addData(ret[dates[i]], dates[i]);
                 }
+
+                /*$('#myChart').remove();
+                $('#myChartContainer').html("<canvas id=\"myChart\"></canvas>")
+
+                ctx = $('#myChart').get(0).getContext("2d");
+                myLineChart = new Chart(ctx).Line(chartdata, options);*/
             },
             error: function(xhr, status, error) {
                 $('#chartContainer').waitMe('hide');
