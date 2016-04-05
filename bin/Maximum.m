@@ -11,9 +11,7 @@ for i = 1 : size(y,1)
     end
 
 end
-% if Max_y == 0 % si jamais la colonne des y ne contient que des zeros
-% Max_y = 1; % on divisera cette colonne par 1 --> ne la modifie pas et evite l'erreur de la division par zero
-% end
+
 
 
 Max_X = abs( X(1,:) );
@@ -27,9 +25,6 @@ for j = 1 : size(X,2)
         
    end
 
-%    if Max_X(1,j) == 0  % si jamais une colonne ne contient que des zeros
-%    Max_X(1,j) = 1; % on divisera cette colonne par 1 --> ne la modifie pas et evite l'erreur de la division par zero
-%    end
 
 
 end

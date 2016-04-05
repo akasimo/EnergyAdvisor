@@ -4,7 +4,7 @@ clear ; close all; clc
 
 
 
-[MatriceSansNan] = loader('../res/csv/sud.csv', 0 , 0);
+[MatriceSansNan] = loader('historiques_consommations_zones\sud.csv', 0 , 0);
 
 ymaster =  MatriceSansNan(:,2);
 Xmaster = [];
@@ -13,6 +13,8 @@ for i = 3 : size(MatriceSansNan , 2)
     Xmaster = [ Xmaster , MatriceSansNan( : , i ) ];
 
 end
+
+
 
 Xmaster = Transformation_binaire( Xmaster );
 
@@ -27,7 +29,7 @@ i = 1;
 rng('shuffle');% pour avoir seed different chaque fois
 while i <= taille_en_pourcentage_set_d_evaluation * size( Xmaster , 1)    
 
-r = randi([1 size( X , 1 ) ],1,1); %renvoyer des integers aleatoires dans intervalle [1 ; size(x1 ; 1) ] dans une matrice 1 x 1
+r = randi([1 size( X , 1 ) ],1,1); 
 
 evaluation_X = [ evaluation_X ; X( r , : ) ];
 evaluation_y = [ evaluation_y ; y( r , : ) ];
@@ -35,11 +37,9 @@ evaluation_y = [ evaluation_y ; y( r , : ) ];
 X = [ X( 1 : r - 1 , : ) ; X( r + 1 : end , : ) ];
 y = [ y( 1 : r - 1 , : ) ; y( r + 1 : end , : ) ];
 
-% [ X , ps ] = removerows( X , 'ind' , [ r ] );
-% [ y , ps ] = removerows( y , 'ind' , [ r ] );
-
 i = i + 1;
 end
+
 
 input_layer_size  = size(Xmaster,2);
 num_labels = size(ymaster,2);
@@ -55,8 +55,13 @@ X = transfo_puissance( X, 1);%0.999 mieux que 1 // puissance 1 marche mieux ? %e
 
 [ Max_X , Max_y ] = Maximum( X , y );
 
+
+affichy = evaluation_y;
+affichX = evaluation_X;
+
 [X, y] = rapporte_a_un(X,y, Max_X, Max_y);
 [evaluation_X, evaluation_y] = rapporte_a_un(evaluation_X,evaluation_y, Max_X, Max_y);
+
 
 
 Theta = cell(1, nbweightmatrices); m = size(X, 1);
@@ -86,10 +91,15 @@ end
 
 
 
+
+
+for nombre_iterations_entrainement = 1 : 150
+
+
    
 
 
-options = optimset('MaxIter', 10);
+options = optimset('MaxIter', nombre_iterations_entrainement);
 lambda = 0; 
 % Create "short hand" for the cost function to be minimized
 costFunction = @(p) nnCostFunction(p, ...
@@ -108,7 +118,28 @@ costFunction = @(p) nnCostFunction(p, ...
 fprintf('moyenne des erreurs pourcentage :  %f   |   ecart type moyen pourcentage : %f  \n', erreur_moyenne_pourcen, sqrt(variance_pourcen) );
 
 
-pause;
+prevision_mat = prevision_mat'*Max_y;
+affichy ;%ok
+affichX2 = affichX ; %(colone 1
+
+
+
+ax1 = subplot(2,1,1);
+scatter(ax1 , affichX( : , 1 ) , affichy )
+title('Résultas attendus')
+ax2 = subplot(2,1,2);
+
+% fig = scatter(ax2 , affichX( : , 1 ) ,prevision_mat ,'filled','d');
+fig = scatter(ax2 , affichX( : , 1 ) ,prevision_mat);
+title(strcat( 'Previsions du réseau de neurones : ' , int2str( nombre_iterations_entrainement ) , ' itérations d entraînement') )
+saveas(fig, strcat( 'images_demo_regression\puissance_deux\image', int2str( nombre_iterations_entrainement ) , '.png' ) )
+close all
+
+end
+
+
+
+
 % if (erreur_moyenne_pourcen > 30 || sqrt(variance_pourcen) > 10 || isnan( erreur_moyenne_pourcen ) == 1 )
 %     
 %     X                                                           %SIGMOID 1.2 / 5 MAT POIDS / 30 UNITS ME SEMBLE / 10 JOURS

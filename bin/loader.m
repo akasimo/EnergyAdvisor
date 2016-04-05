@@ -20,12 +20,3 @@ reponse = 0;
                                reponse = 0;      
                                 
  end
-
-
-% y =  MatriceSansNan(:,1);
-% X = [];
-% for i = 2 : size(MatriceSansNan , 2)
-% 
-%     X = [ X , MatriceSansNan( : , i ) ];
-% 
-% end

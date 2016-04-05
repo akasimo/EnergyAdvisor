@@ -3,16 +3,16 @@
 clear ; close all; clc
 
 nombre_de_zones = 2;
-nombre_de_jours = 5;
+nombre_de_jours = 4;
 fichiers_training = cell(1, nombre_de_zones);
 
-fichiers_training{1} = '../res/csv/nord.csv';
-fichiers_training{2} = '../res/csv/sud.csv';
+fichiers_training{2} = '../res/csv/nord.csv';
+fichiers_training{1} = '../res/csv/sud.csv';
 
 matrice_csv = [];
 
 matrice_de_temperatures_previsionnelles_csv_come = loader('../res/csv/temp.csv', 0 , 0);
-dates_previsions = matrice_de_temperatures_previsionnelles_csv_come( 1 : 5 , 1 );  % organiation ou premiere colone c'est les dates
+dates_previsions = matrice_de_temperatures_previsionnelles_csv_come( 1 : 4 , 1 );  % organiation ou premiere colone c'est les dates
 
 matrice_csv = [ matrice_csv , dates_previsions];
 
@@ -20,20 +20,25 @@ matrice_csv = [ matrice_csv , dates_previsions];
 for f = 1 : nombre_de_zones
     
     
-[ matrice_des_temps_de_toutes_les_stations_par_jour ] = organiser_matrice_de_temperatures_previsionnelles(matrice_de_temperatures_previsionnelles_csv_come);
+[ matrice_des_temps_de_toutes_les_stations_par_jour ] = organiser_matrice_de_temperatures_previsionnelles(matrice_de_temperatures_previsionnelles_csv_come, fichiers_training{f});
 
-matrice_des_temps_de_toutes_les_stations_par_jour = matrice_des_temps_de_toutes_les_stations_par_jour( 1 : end , 2 : end );
+matrice_des_temps_de_toutes_les_stations_par_jour = matrice_des_temps_de_toutes_les_stations_par_jour( 1 : end , 2 : size(matrice_des_temps_de_toutes_les_stations_par_jour , 2) - 1);
+matrice_des_temps_de_toutes_les_stations_par_jour
 
+pause;
 
 matrices_X_a_predire = [];% les indices des temp moyennes doivent correspondre indices des dates
-
+%chaque ligne doit donc representer un jour !
 for i = 1 : nombre_de_jours
 
 matrices_X_a_predire  = [ matrices_X_a_predire ; temperature_moyenne( matrice_des_temps_de_toutes_les_stations_par_jour( i , : ) ) ];
 
 end
 
-matrices_X_a_predire = [ matrices_X_a_predire , matrice_de_temperatures_previsionnelles_csv_come( 1 : 5 , 5 ) ];
+matrices_X_a_predire
+pause;
+
+matrices_X_a_predire = [ matrices_X_a_predire , matrice_de_temperatures_previsionnelles_csv_come( 1 : 4 , 5 ) ];
 matrices_X_a_predire = Transformation_binaire( matrices_X_a_predire );
 
 
@@ -100,7 +105,7 @@ end
 
 
 
-options = optimset('MaxIter', 500);
+options = optimset('MaxIter', 10);
 lambda = 0; 
 % Create "short hand" for the cost function to be minimized
 costFunction = @(p) nnCostFunction(p, ...

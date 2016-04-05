@@ -99,13 +99,13 @@ end
 matrice_temp_moyennes = [];
 
 for j = 1 : size( temperatures_moyennes_sud , 1 )
-%fprintf('tagueule1')
+
 
    for i = 1 : size( matrice_des_dates , 1 )
        
-        if temperatures_moyennes_sud( j , 1 ) == matrice_des_dates( i , 1)% les indices se correspondent pas
-          % fprintf('tagueule2')
-            matrice_temp_moyennes = [ matrice_temp_moyennes ; [ temperatures_moyennes_sud( j , 1 ) , temperatures_moyennes_sud( j , 3 )  ] ];% colonne 1 ^pir date et 2 pour temp moyenne
+        if temperatures_moyennes_sud( j , 1 ) == matrice_des_dates( i , 1)
+      
+            matrice_temp_moyennes = [ matrice_temp_moyennes ; [ temperatures_moyennes_sud( j , 1 ) , temperatures_moyennes_sud( j , 3 )  ] ];
     
         end
     
@@ -133,20 +133,6 @@ yevaluation
 matrice_des_temperatures
 matrice_des_temperatures_resolution
 matrice_des_temperatures_evaluation
-% 
-% 
-% coeff = inv( matrice_des_temperatures_resolution )*yresolution;
-% 
-% 
-% test_calcul_de_temperatures_moyennes = matrice_des_temperatures_evaluation*coeff;
-% yevaluation;
-% 
-% test_calcul_de_temperatures_moyennes = matrice_des_temperatures_resolution*coeff;
-% yresolution;
-% 
-
-
-
 
 
 
@@ -154,9 +140,6 @@ matrice_des_temperatures_evaluation
 somme_des_erreurs = 0;
 mat_erreurs = [];
 tours = 0;
-
-% for j = 84 : size( Xmaster , 1 ) - tailleXY + 1    
-    
 
 
 X = matrice_des_temperatures_resolution;
