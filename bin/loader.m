@@ -1,7 +1,7 @@
 function [ MatriceSansNan ] = loader(file, R, C)
 
 
-celluleGlobale = csvread(file, R , C);% les rangs et colonnes commencent à index 0  pour csvread et renvoie matrice normale
+celluleGlobale = csvread(file, R , C);% ranks start at index 0  for csvread and send back normalized matrix
 
 MatriceSansNan = [];
 reponse = 0;

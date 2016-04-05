@@ -1,4 +1,4 @@
-function [prevision_mat, variance_pourcen, erreur_moyenne_pourcen, erreur_moyenne_carre ] = erreur_pourcentage_et_carre_moyen(X, y, Max_y, nn_params, hidden_layer_size, input_layer_size, num_labels, nbweightmatrices)
+function [prevision_mat, variance_pourcen, erreur_moyenne_pourcen, erreur_moyenne_carre ] = error_displaying(X, y, Max_y, nn_params, hidden_layer_size, input_layer_size, num_labels, nbweightmatrices)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 

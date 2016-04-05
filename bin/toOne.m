@@ -1,4 +1,4 @@
-function [X, y] = rapporte_a_un(X,y, Max_X, Max_y)
+function [X, y] = toOne(X,y, Max_X, Max_y)
 
 
 

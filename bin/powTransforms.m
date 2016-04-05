@@ -1,4 +1,4 @@
-function [X] = transfo_puissance( X, puissance )
+function [X] = powTransforms( X, puissance )
 %UNTITLED3 Summary of this function goes here
 
 %   Detailed explanation goes here

@@ -1,7 +1,4 @@
 function [ Max_X, Max_y ] = Maximum( X, y )
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
-
 
 Max_y = abs(y(1,1));
 for i = 1 : size(y,1)

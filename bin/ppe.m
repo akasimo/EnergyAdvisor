@@ -1,60 +1,69 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%																			 %%
+%%																			 %%
+%%				 ENERGY ADVISOR MAIN SCRIPT / ALGORITHM						 %%
+%%				LAUNCHED AS IS, WILL RETURN NEEDED FILES					 %%
+%%																			 %%
+%%																			 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %% Initialization
 clear ; close all; clc
 
-nombre_de_zones = 2;
-%nombre_de_jours = 4;
-fichiers_training = cell(1, nombre_de_zones);
+zones = 2;
+%days = 4;
+trainingFiles = cell(1, zones);
 
-fichiers_training{2} = '../res/csv/nord.csv';
-fichiers_training{1} = '../res/csv/sud.csv';
+trainingFiles{2} = '../res/csv/nord.csv';
+trainingFiles{1} = '../res/csv/sud.csv';
 
-matrice_csv = [];
+csvMatrix = [];
 
-matrice_de_temperatures_previsionnelles_csv_come = loader('../res/csv/temp.csv', 0 , 0);
-nombre_de_jours = size(matrice_de_temperatures_previsionnelles_csv_come,1)/62;
-dates_previsions = matrice_de_temperatures_previsionnelles_csv_come( 1 : nombre_de_jours , 1 );  % organiation ou premiere colone c'est les dates
+previsionnalTempsMatrix = loader('../res/csv/temp.csv', 0 , 0);
+days = size(previsionnalTempsMatrix,1)/62;
+previsionsDates = previsionnalTempsMatrix( 1 : days , 1 );  % first column = dates
 
-matrice_csv = [ matrice_csv , dates_previsions];
+csvMatrix = [ csvMatrix , previsionsDates];
 
 
-for f = 1 : nombre_de_zones
+for f = 1 : zones
     
     
-[ matrice_des_temps_de_toutes_les_stations_par_jour ] = organiser_matrice_de_temperatures_previsionnelles(matrice_de_temperatures_previsionnelles_csv_come, fichiers_training{f});
+[ tempsPerDays ] = dataorganization(previsionnalTempsMatrix, trainingFiles{f});
 
-matrice_des_temps_de_toutes_les_stations_par_jour = matrice_des_temps_de_toutes_les_stations_par_jour( 1 : end , 2 : size(matrice_des_temps_de_toutes_les_stations_par_jour , 2) - 1);
-%matrice_des_temps_de_toutes_les_stations_par_jour;
+tempsPerDays = tempsPerDays( 1 : end , 2 : size(tempsPerDays , 2) - 1);
+%tempsPerDays;
 
 %pause;
 
-matrices_X_a_predire = [];% les indices des temp moyennes doivent correspondre indices des dates
-%chaque ligne doit donc representer un jour !
-for i = 1 : nombre_de_jours
+xToPredict = [];% forecast index must corresponds to dates
 
-matrices_X_a_predire  = [ matrices_X_a_predire ; temperature_moyenne( matrice_des_temps_de_toutes_les_stations_par_jour( i , : ) ) ];
+for i = 1 : days
+
+xToPredict  = [ xToPredict ; avgTemp( tempsPerDays( i , : ) ) ];
 
 end
 
-%matrices_X_a_predire;
+%xToPredict;
 %pause;
 
-matrices_X_a_predire = [ matrices_X_a_predire , matrice_de_temperatures_previsionnelles_csv_come( 1 : nombre_de_jours , 5 ) ];
-matrices_X_a_predire = Transformation_binaire( matrices_X_a_predire );
+xToPredict = [ xToPredict , previsionnalTempsMatrix( 1 : days , 5 ) ];
+xToPredict = binaryTransform( xToPredict );
 
 
 
-[MatriceSansNan] = loader(fichiers_training{f}, 0 , 0);
+[noNullMatrix] = loader(trainingFiles{f}, 0 , 0); %remove potential NaN in our matrix
 
-ymaster =  MatriceSansNan(:,2);
+ymaster =  noNullMatrix(:,2);
 Xmaster = [];
-for i = 3 : size(MatriceSansNan , 2)
+for i = 3 : size(noNullMatrix , 2)
 
-    Xmaster = [ Xmaster , MatriceSansNan( : , i ) ];
+    Xmaster = [ Xmaster , noNullMatrix( : , i ) ];
 
 end
 
-Xmaster = Transformation_binaire( Xmaster );
+Xmaster = binaryTransform( Xmaster );
 
 
 X = Xmaster;
@@ -68,12 +77,12 @@ hidden_layer_size = 30;
 nbweightmatrices = 5;
 
    
-X = transfo_puissance( X, 1);%0.999 mieux que 1 // puissance 1 marche mieux ? %essayer de faire avec theta generalises
+X = powTransforms( X, 1);
 
 [ Max_X , Max_y ] = Maximum( X , y );
 
-[X, y] = rapporte_a_un(X,y, Max_X, Max_y);
-[matrices_X_a_predire , A ] = rapporte_a_un(matrices_X_a_predire,[1 , 2 ; 3 , 4 ], Max_X, 1);
+[X, y] = toOne(X,y, Max_X, Max_y);
+[xToPredict , A ] = toOne(xToPredict,[1 , 2 ; 3 , 4 ], Max_X, 1);
 
 
 
@@ -83,11 +92,11 @@ initial_Theta = cell(1, nbweightmatrices);
 
 
 
-%%%%   INITIALISATION ALEATOIRE DES POIDS   %%%%%%%%%
+%%%%   Random weight initialization   %%%%%%%%%
 initial_Theta{1} = randInitializeWeights(input_layer_size, hidden_layer_size) ;
-for i = 2 : nbweightmatrices - 1 % deja unrollé la premiere probleme je commencais à indice 1 !!!!
+for i = 2 : nbweightmatrices - 1
     
-   initial_Theta{i} = randInitializeWeights(hidden_layer_size, hidden_layer_size) ;% +1 dans le code ??
+   initial_Theta{i} = randInitializeWeights(hidden_layer_size, hidden_layer_size) ;
 
 end
 initial_Theta{nbweightmatrices} = randInitializeWeights(hidden_layer_size, num_labels);
@@ -95,12 +104,12 @@ initial_Theta{nbweightmatrices} = randInitializeWeights(hidden_layer_size, num_l
 
 
 
-%%%%   DEROULE LES MATRICES DE POIDS   %%%%%%%%%
-initial_nn_params = [initial_Theta{1}(:)]; %autant d elements foutus dans init
+%%	Unroll the weight matrix
+randomInitialize = [initial_Theta{1}(:)];
 
-for i = 2 : nbweightmatrices % deja unrollé la premiere
+for i = 2 : nbweightmatrices % the first one is already unrolled
 
-    initial_nn_params = [initial_nn_params ; initial_Theta{i}(:)];
+    randomInitialize = [randomInitialize ; initial_Theta{i}(:)];
 
 end
 
@@ -115,26 +124,26 @@ costFunction = @(p) nnCostFunction(p, ...
                                    num_labels, X, y, lambda, nbweightmatrices);
 
 
-[nn_params , cost] = fmincg(costFunction, initial_nn_params, options);%ne fait rien pour l'instant
+[nn_params , cost] = fmincg(costFunction, randomInitialize, options);
 
 
 
-matrice_des_predictions = [];
+predictionsMatrix = [];
 
-for k = 1 : nombre_de_jours
+for k = 1 : days
     
-matrice_des_predictions = [ matrice_des_predictions ;  Max_y*predict(initial_nn_params ,matrices_X_a_predire(k,:) , hidden_layer_size, input_layer_size, num_labels, nbweightmatrices) ];
+predictionsMatrix = [ predictionsMatrix ;  Max_y*predict(randomInitialize ,xToPredict(k,:) , hidden_layer_size, input_layer_size, num_labels, nbweightmatrices) ];
 
 end
 
 
-matrice_csv = [ matrice_csv , matrice_des_predictions ];
+csvMatrix = [ csvMatrix , predictionsMatrix ];
 
 
 end
 
 
-dlmwrite('../res/csv/pred.csv',matrice_csv,'precision',14);
+dlmwrite('../res/csv/pred.csv',csvMatrix,'precision',14);
 
 
 
