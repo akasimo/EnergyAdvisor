@@ -5,6 +5,18 @@
 %%				LAUNCHED AS IS, WILL RETURN NEEDED FILES					 %%
 %%																			 %%
 %%																			 %%
+%%			  				 Files are as follow							 %%
+%%																			 %%
+%%																			 %%
+%%																			 %%
+%%				   nord/sud.csv 						temp.csv 			 %%
+%%		|DATE|CONSUMPTION|TEMP|WEEKINDEX		DATE|LAT|LON|TEMP|WEEKINDEX  %%
+%%																			 %%
+%%																			 %%
+%%																			 %%
+%%				 Any data provider respecting this format				 	 %%
+%%					  can comply with our algorithm							 %%											
+%%																			 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
