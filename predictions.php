@@ -34,8 +34,8 @@
             <li><a href="historic.php">Historique</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="settings.php">Paramètres</a></li>
             <li><a href="team.php">L'équipe</a></li>
-            <li><a href="#contactmodal" data-toggle="modal">Contact</a></li>
           </ul>
 
         </div><!--/.nav-collapse -->
@@ -93,28 +93,7 @@
 
   </div>
 
-  <div id="contactmodal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Contact</h4>
-                    </div>
-                    <form action="#" method="post">
-                        <div class="modal-body">
-                            <p>Veuillez entrer votre adresse mail et votre message</p>
-                            <p>Mail: <input id="mailaddress" name="adr" type="email" value=""></p>
-                            <p>Sujet: <input id="subject" name="sub" type="text" value=""></p>
-                            <p>Message: <textarea id="message" name="txt"></textarea></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                            <input type="submit" value="Envoyer" class="btn btn-primary"></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+  
 	</body>
 
 

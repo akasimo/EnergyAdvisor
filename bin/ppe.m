@@ -126,8 +126,10 @@ for i = 2 : nbweightmatrices % the first one is already unrolled
 end
 
 
+file = fopen('iter.txt','r');
+numberOfIterations = fscanf(file,'%d');%content read from file (set on the website)
 
-options = optimset('MaxIter', 2);
+options = optimset('MaxIter', numberOfIterations);
 lambda = 0; 
 % Create "short hand" for the cost function to be minimized
 costFunction = @(p) nnCostFunction(p, ...

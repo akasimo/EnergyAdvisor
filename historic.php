@@ -56,13 +56,7 @@
         <h4>Choisissez la zone de prédiction</h4>
         <form name="prediction" id="prediction">
           <fieldset class="form-group">
-            <!--<label for="exampleSelect1">Durée (semaines)</label>
-            <select class="form-control" id="duration" name="duration">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-            </select>-->
+            
             <label for="exampleSelect1">Zone</label>
             <select class="form-control" id="zone" name="zone">
               <option>Nord</option>
