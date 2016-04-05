@@ -1,13 +1,17 @@
 function [ matrice_des_temps_de_toutes_les_stations_par_jour] = organiser_matrice_de_temperatures_previsionnelles(matrice_de_temperatures_previsionnelles_csv_come, zone)
 
-
-dates = matrice_de_temperatures_previsionnelles_csv_come( 1 : 4 , 1 ) ; % 5 parce que 5 jours
-index = matrice_de_temperatures_previsionnelles_csv_come( 1 : 4 , size( matrice_de_temperatures_previsionnelles_csv_come , 2)  ); 
-
-
 % date - lat - long - temp - index jour
 matrice_de_temperatures_previsionnelles_csv_come = matrice_de_temperatures_previsionnelles_csv_come( 1 : end , 2 : size( matrice_de_temperatures_previsionnelles_csv_come , 2 ) - 1 );
+
+
 % vire colonne date et colonne index garde que lat long et temp
+nombre_de_jours = size(matrice_de_temperatures_previsionnelles_csv_come,1)/62;
+
+dates = matrice_de_temperatures_previsionnelles_csv_come( 1 : nombre_de_jours , 1 ) ; % 5 parce que 5 jours
+index = matrice_de_temperatures_previsionnelles_csv_come( 1 : nombre_de_jours , size( matrice_de_temperatures_previsionnelles_csv_come , 2)  ); 
+
+
+
 
 
 
@@ -57,7 +61,7 @@ resu2 = [];
 
 for k = 1 : size ( stations , 1)
 
-resu2 = [ resu2 , resu1( ( k - 1 )*4 + 1 : k*4 , 1 ) ];
+resu2 = [ resu2 , resu1( ( k - 1 )*nombre_de_jours + 1 : k*nombre_de_jours , 1 ) ];
 
 end
 
