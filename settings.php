@@ -5,12 +5,16 @@
             Energy Advisor
         </title>
         <link href="res/css/bootstrap.css" rel="stylesheet">
-            <script src="res/js/jquery.js">
-            </script>
-            <script src="res/js/bootstrap.min.js">
-            </script>
-            <meta charset="utf-8">
-            </meta>
+      <link type="text/css" href="res/css/waitMe.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="res/js/jqueryUI/jquery-ui.css">
+      <link rel="stylesheet" type="text/css" href="res/js/jqueryUI/jquery-ui.structure.css">
+      <link rel="stylesheet" type="text/css" href="res/js/jqueryUI/jquery-ui.theme.css">
+      <script type="text/javascript" src="res/js/jquery.js"></script>
+      <script type="text/javascript" src="res/js/waitMe.js"></script>
+      <script src="res/js/Settings.js"></script>
+      <script src="res/js/bootstrap.min.js"></script>
+      <script src="res/js/jqueryUI/jquery-ui.js"></script>
+      <meta charset="UTF-8">
         </link>
     </head>
     <body>
@@ -63,7 +67,7 @@
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container" id="maincontainer">
           
           <?php
             if(isset($_POST['zone'])){ 
@@ -77,9 +81,13 @@
         
               <div class="page-header"><h1>Paramètres</h1></div>
 
-              <div class="container"><h2>Merci</h2>
-              <p>Votre modification a bien été prise en compte et sera effective à la prochaine mise à jour.</p></div>
-            <?php }
+              <div class="container" id="thanks"><h2>Merci</h2>
+              <p>Votre modification a bien été prise en compte et sera effective à la prochaine mise à jour.</p>
+                
+              <button id="algo" class="btn btn-danger">Lancer l'algorithme (TRÈS LONG !)</button>
+              </div>
+            <?php 
+            }
 
             else{
           ?>
@@ -120,6 +128,8 @@
             </a>
         </div>
     </div>
+
+    <div id="dialog" title="Confirmez">Confirmez vous l'exécution de l'algorithme (très long avec GNU Octave) ?</div>​
 
     </body>
 </html>
