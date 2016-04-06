@@ -53,7 +53,7 @@
       <div class="row">
 
         <div class="col-md-6 text-justify"><p>EnergyAdvisor est une solution en ligne permettant d'exécuter un algorithme d'apprentissage automatique basé sur un réseau de neurones à 5 couches. Ce réseau de neurones prédit la consommation du gaz en France, en se basant sur les données de GRTgaz</p>
-        <p>Nous avons réalisé une étude de marché afin de déterminer les différentes variables à utiliser. Nous avons utilisé les données de températures, de consommations ainsi que des variables qualitatives calendaires.</p>
+        <p>Nous avons réalisé une étude de marché afin de déterminer les différentes variables à utiliser. Nous avons utilisé les données de température, de consommation ainsi que des variables qualitatives calendaires.</p>
         </div>
 
         <div class="col-md-6">
