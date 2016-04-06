@@ -52,15 +52,28 @@
 
       <div class="row">
 
-        <div class="col-md-6 text-justify"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, odit natus, beatae exercitationem quasi dignissimos totam nisi eos omnis possimus eum. Cumque nemo rem hic in labore sed ratione quia!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, odit natus, beatae exercitationem quasi dignissimos totam nisi eos omnis possimus eum. Cumque nemo rem hic in labore sed ratione quia!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, odit natus, beatae exercitationem quasi dignissimos totam nisi eos omnis possimus eum. Cumque nemo rem hic in labore sed ratione quia!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, odit natus, beatae exercitationem quasi dignissimos totam nisi eos omnis possimus eum. Cumque nemo rem hic in labore sed ratione quia!</p></div>
+        <div class="col-md-6 text-justify"><p>EnergyAdvisor est une solution en ligne permettant d'exécuter un algorithme d'apprentissage automatique basé sur un réseau de neurones à 5 couches. Ce réseau de neurones prédit la consommation du gaz en France, en se basant sur les données de GRTgaz</p>
+        <p>Nous avons réalisé une étude de marché afin de déterminer les différentes variables à utiliser. Nous avons utilisé les données de températures, de consommations ainsi que des variables qualitatives calendaires.</p>
+        </div>
 
         <div class="col-md-6">
           <img class="center-block" src="res/img/machinelearning.png" alt="">
         </div>
       </div>
+      <br>
+      <div class="row">
+
+        <div class="col-md-6">
+          <img class="center-block" src="res/img/energrt.jpg" alt="">
+        </div>
+
+        <div class="col-md-6 text-justify"><p>Nous avons rencontré des professionnels du milieu : GRTgaz. Ils proposent un outil similaire s'appuyant sur des modèles statistiques et utilisant des variables d'entrée similaires.</p>
+        <p>Nous avons réussi à atteindre le minimum utilisable par leur service. En effet, notre erreur a atteind 7%, ce qui représente leur résultat minimal. Notre projet pourra s'améliorer avec un jeu de données plus complet et plus ciblé par rapport au marché du gaz.</p>
+        </div>
+
+        
+      </div>
+
 
     </div>
 
