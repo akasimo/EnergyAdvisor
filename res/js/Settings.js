@@ -1,5 +1,4 @@
 $(function() {
-    $('#dialog').css('display', 'none');
     
     $('#algo').click(function() {
         $('#dialog').dialog({
@@ -41,7 +40,7 @@ $(function() {
 
                 },
                 Non: function() {
-                    $(this).dialog("close");
+                    $(this).remove();
                 }
             },
             close: function(event, ui) {

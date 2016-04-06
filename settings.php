@@ -129,7 +129,7 @@
         </div>
     </div>
 
-    <div id="dialog" title="Confirmez">Confirmez vous l'exécution de l'algorithme (très long avec GNU Octave) ?</div>​
+    <div id="dialog" title="Confirmez" style="display:none;">Confirmez vous l'exécution de l'algorithme (très long avec GNU Octave) ?</div>​
 
     </body>
 </html>
