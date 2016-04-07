@@ -11,12 +11,11 @@ If you want to make it work in other contexts, you can modify the Java downloade
 
 ---
 
-# Installation
+# Installation (On Linux / OS X only)
 
 For the installation, you'll need:
 
 1. A working installation of Matlab and environment path correctly set (ie you can call Matlab from terminal)
-* This works only on Linux and OS X.
 
 2. A working installation of GNU Octave
 
