@@ -9,8 +9,6 @@ This project has been made during our 4th year at ECE Paris. It would be appreci
 
 If you want to make it work in other contexts, you can modify the Java downloader sources to get your data from other providers.
 
----
-
 # Installation (On Linux / OS X only)
 
 For the installation, you'll need:
@@ -28,3 +26,7 @@ All you need to do is to put all the files in the /var/www folder (or ~/Sites), 
 Then you'll need to configure the PERIODIC_EXECUTE.sh file to run periodically (the scheduler CRON can be used).
 
 Finally, the website will be able to run properly on your server. You can host it or make it run on your local machine.
+
+# License
+
+COVERED SOFTWARE IS PROVIDED UNDER THE CDDL LICENSE ON AN AS IS BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE COVERED SOFTWARE IS FREE OF DEFECTS, MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE COVERED SOFTWARE IS WITH YOU. SHOULD ANY COVERED SOFTWARE PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL DEVELOPER OR ANY OTHER CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY COVERED SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER.	
